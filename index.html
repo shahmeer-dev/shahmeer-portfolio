@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahmeer Akbar | HubSpot Technical Architect</title>
+    <meta name="title" content="Shahmeer Akbar | HubSpot Technical Architect">
+    <meta name="description"
+        content="Technical HubSpot Architect specializing in high-integrity system design, lead capture logic, and complex CRM sanitization for scaling agencies.">
+    <meta name="keywords"
+        content="HubSpot Expert, CRM Systems Architect, Data Integrity, HubSpot Automation, Technical HubSpot Consultant">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shahmeerakbar.tech/">
+    <meta property="og:title" content="Shahmeer Akbar | HubSpot Systems Architect">
+    <meta property="og:description"
+        content="Transforming complex agency blueprints into high-integrity HubSpot architectures with zero data loss.">
+    <meta property="og:image" content="shahmeer.jpg">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=1.2">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@500&display=swap');
+
+        :root {
+            --bg: #ffffff;
+            --accent: #ff7a59;
+            --royal: #4f46e5;
+            --text: #0f172a;
+            --dim: #64748b;
+            --error: #ef4444;
+            --success: #10b981;
+            --glass: rgba(255, 255, 255, 0.7);
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* NAV */
+        nav {
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            border-radius: 100px;
+            margin-top: 25px;
+            position: sticky;
+            top: 25px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* MATCHING SHIMMER FOR EMAIL NODE */
+        .nav-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-shimmer::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 25%;
+            /* Slightly wider for better visibility in nav */
+            height: 200%;
+            background: rgba(255, 122, 89, 0.15);
+            /* Using your accent color for elegance */
+            transform: rotate(30deg);
+            animation: shimmer 4s infinite;
+            /* Uses your existing @keyframes shimmer */
+        }
+
+        .nav-shimmer:hover {
+            border-color: var(--accent) !important;
+            background: #ffffff !important;
+            transition: 0.3s;
+        }
+
+        @keyframes elegantScan {
+            0% {
+                left: -150%;
+            }
+
+            15% {
+                left: 150%;
+            }
+
+            100% {
+                left: 150%;
+            }
+        }
+
+        .nav-email-node:hover {
+            border-color: var(--accent) !important;
+            background: #fff !important;
+            box-shadow: 0 5px 15px rgba(255, 122, 89, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .brand span {
+            color: var(--accent);
+        }
+
+        .status-tag {
+            font-family: 'JetBrains Mono';
+            font-size: 10px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--text);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+        }
+
+        .status-tag .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--success);
+            animation: livePulse 2s infinite;
+        }
+
+        @keyframes livePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.4);
+                opacity: 0.6;
+            }
+        }
+
+        /* HERO */
+        .hero {
+            padding: 120px 0;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 5.5rem;
+            line-height: 0.85;
+            font-weight: 800;
+            letter-spacing: -4px;
+            margin-bottom: 30px;
+        }
+
+        .hero-content h1 span,
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent), #ff4d21);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--dim);
+            line-height: 1.6;
+            margin-bottom: 45px;
+            max-width: 580px;
+        }
+
+        .cert-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            background: #fff;
+            padding: 18px 28px;
+            border-radius: 24px;
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            margin-bottom: 20px;
+        }
+
+        .cert-highlight:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(255, 122, 89, 0.15);
+        }
+
+        .cert-highlight img {
+            width: 55px;
+            height: 55px;
+        }
+
+        .email-direct {
+            display: block;
+            font-family: 'JetBrains Mono';
+            font-size: 13px;
+            color: var(--dim);
+            text-decoration: none;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .email-direct:hover {
+            color: var(--accent);
+        }
+
+        .image-box {
+            position: relative;
+        }
+
+        .profile-img {
+            border-radius: 48px;
+            width: 100%;
+            box-shadow: 0 40px 80px -20px rgba(15, 23, 42, 0.2);
+            display: block;
+        }
+
+        /* GLASS-UI CERTIFICATION BADGE */
+        .cert-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            /* Glass logic matching Nav and Rate Label */
+            background: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(15, 23, 42, 0.1) !important;
+
+            padding: 18px 28px;
+            border-radius: 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-highlight:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-color: var(--accent) !important;
+            box-shadow: 0 20px 40px rgba(255, 122, 89, 0.1);
+        }
+
+        /* Matching Shimmer for Certification */
+        .cert-highlight::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255, 122, 89, 0.1);
+            transform: rotate(30deg);
+            animation: shimmer 4s infinite;
+        }
+
+        .cert-highlight img {
+            width: 55px;
+            height: 55px;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.05));
+        }
+
+        /* RATE LABEL & SHIMMER ANIMATION */
+        /* GLASS-EFFECT RATE LABEL */
+        .rate-label {
+            position: absolute;
+            bottom: 30px;
+            left: -30px;
+            /* Navigation-style Glass logic */
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+
+            color: var(--text);
+            /* Switched to dark text for glass readability */
+            padding: 16px 30px;
+            font-family: 'JetBrains Mono';
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .rate-label::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            /* Shimmer updated to be visible on glass */
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 122, 89, 0.3),
+                    transparent);
+            transform: rotate(30deg);
+            animation: shimmer 4s infinite;
+        }
+
+        .rate-label small {
+            font-size: 9px;
+            color: var(--dim);
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .rate-label span {
+            color: var(--accent);
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -60%;
+            }
+
+            20% {
+                left: 120%;
+            }
+
+            100% {
+                left: 120%;
+            }
+        }
+
+        .rate-label small {
+            font-size: 9px;
+            /* Darkened from var(--dim) to var(--text) for high-contrast on glass */
+            color: var(--text);
+            font-weight: 800;
+            /* Increased weight to match your brand style */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 4px;
+            opacity: 0.9;
+            /* Slight transparency to keep the technical feel */
+        }
+
+        .rate-label span {
+            color: var(--accent);
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        /* GRID ANIMATION */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 100px 0;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 50px;
+            border-radius: 40px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            animation: floatLife 6s ease-in-out infinite;
+        }
+
+        .card:nth-child(even) {
+            animation-delay: 2s;
+        }
+
+        @keyframes floatLife {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            background: #ffffff;
+            transform: translateY(-20px) scale(1.02) !important;
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.1);
+            animation-play-state: paused;
+        }
+
+        .portfolio-cta {
+            grid-column: span 3;
+            background: var(--text);
+            color: #fff;
+            padding: 100px;
+            border-radius: 60px;
+            text-align: center;
+            background-image: radial-gradient(circle at top right, #334155, #0f172a);
+            margin: 40px 0;
+        }
+
+        /* UNIFIED GLASS BUTTON UI */
+        .btn {
+            /* Base Glass State */
+            background: rgba(255, 255, 255, 0.7) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            color: var(--text) !important;
+            border: 1px solid rgba(15, 23, 42, 0.1) !important;
+
+            padding: 22px 55px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 800;
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+
+            /* Smooth transition for all properties */
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+        }
+
+        /* Unified Hover State for both buttons */
+        .btn:hover:not(:disabled) {
+            background: #ffffff !important;
+            /* Clears the glass to solid white */
+            border-color: var(--accent) !important;
+            /* HubSpot Orange Border */
+            color: var(--text) !important;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
+        }
+
+        /* Ensure the shimmer follows the same timing */
+        .btn-shimmer::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255, 122, 89, 0.15);
+            transform: rotate(30deg);
+            animation: shimmer 4s infinite;
+        }
+
+        /* CONTACT SECTION */
+        .contact {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 80px;
+            padding: 120px 0;
+            border-top: 1px solid #f1f5f9;
+            align-items: start;
+        }
+
+        .contact-content h2 {
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 0.85;
+            letter-spacing: -3px;
+            margin-bottom: 30px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            margin-bottom: 5px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--accent);
+            background: #fff;
+        }
+
+        .validation-msg {
+            font-size: 10px;
+            font-family: 'JetBrains Mono';
+            margin-bottom: 20px;
+            height: 15px;
+            color: transparent;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .validation-msg.visible {
+            color: var(--error);
+        }
+
+        #successMessage {
+            display: none;
+            padding: 50px;
+            border: 1px solid var(--success);
+            border-radius: 30px;
+            background: rgba(16, 185, 129, 0.03);
+            text-align: center;
+        }
+
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono';
+            font-size: 11px;
+            color: var(--dim);
+            letter-spacing: 1px;
+        }
+
+        .copy-trigger {
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 8px 15px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .copy-trigger:hover {
+            color: var(--text);
+            background: #f8fafc;
+        }
+
+        @media (max-width: 1000px) {
+
+            .hero,
+            .contact {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1,
+            .contact-content h2 {
+                font-size: 3.5rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-cta {
+                grid-column: span 1;
+                padding: 60px 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="container">
+        <nav data-aos="fade-down">
+            <div class="brand">SHAHMEER <span>AKBAR</span></div>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <a href="mailto:eng@shahmeerakbar.tech" class="status-tag nav-shimmer"
+                    style="text-decoration: none; background: #f8fafc; color: var(--text); border: 1px solid #e2e8f0;">
+                    ENG@SHAHMEERAKBAR.TECH
+                </a>
+                <div class="status-tag">
+                    <div class="pulse-dot"></div> STATUS: OPEN
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div class="hero-content" data-aos="fade-right">
+                <span
+                    style="font-family: 'JetBrains Mono'; color: var(--royal); font-weight: 700; font-size: 12px; margin-bottom: 20px; display: block;">
+                    [ BS COMPUTER SCIENCE // HUBSPOT TECHNICAL ARCHITECT ]
+                </span>
+                <h1>Technical <br>System <span>Integrity.</span></h1>
+                <p>I specialize in the technical implementation of HubSpot environments. Using my background in Computer
+                    Science, I translate operational logic into stable, high-integrity CRM systems that scaling agencies
+                    can rely on.</p>
+
+                <a href="https://app-na2.hubspot.com/academy/achievements/wq9r22zd/en/1/shahmeer-akbar/hubspot-marketing-hub-software"
+                    target="_blank" class="cert-highlight">
+                    <img src="marketing-hub-software-certification.png" alt="HubSpot Cert">
+                    <div
+                        style="font-family: 'JetBrains Mono'; font-size: 10px; color: var(--accent); font-weight: 700;">
+                        <span>VERIFIED_TECHNICAL_AUTHORITY</span>
+                        <b
+                            style="display: block; font-size: 16px; color: var(--text); line-height: 1.2; margin-top: 4px;">
+                            HubSpot Marketing Hub <br> Software Certified
+                        </b>
+                    </div>
+                </a>
+            </div>
+
+            <div class="image-box" data-aos="zoom-in">
+                <img src="shahmeer.jpg" alt="Shahmeer Akbar" class="profile-img">
+                <div class="rate-label">
+                    <small>TECHNICAL_FEE</small>
+                    <span>$50/HOUR</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <span style="font-size:2.5rem; margin-bottom:25px; display:block;">🎯</span>
+                <h3 style="font-weight:800; margin-bottom:15px;">Lead Capture Logic</h3>
+                <p>Implementing conditional validation and domain-filtering to ensure data integrity at the point of
+                    entry.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <span style="font-size:2.5rem; margin-bottom:25px; display:block;">📊</span>
+                <h3 style="font-weight:800; margin-bottom:15px;">Data Sanitization</h3>
+                <p>Transforming complex datasets into standardized, CRM-ready records with zero duplication.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <span style="font-size:2.5rem; margin-bottom:25px; display:block;">🧠</span>
+                <h3 style="font-weight:800; margin-bottom:15px;">Behavioral Intel</h3>
+                <p>Configuring fit-scoring thresholds based on real-time engagement data for sales precision.</p>
+            </div>
+
+            <div class="portfolio-cta" data-aos="zoom-in">
+                <h2 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -2px;">Technical
+                    Repository</h2>
+                <p style="color: #94a3b8; margin-bottom: 40px; font-size: 1.2rem;">See the build logic behind my
+                    high-integrity HubSpot implementations.</p>
+                <a href="Shahmeer_Akbar_HubSpot_Technical_Architecture_2026.pdf" target="_blank"
+                    class="btn btn-shimmer">
+                    View Documentation
+                </a>
+            </div>
+
+            <div class="card" data-aos="fade-up">
+                <span style="font-size:2.5rem; margin-bottom:25px; display:block;">⚙️</span>
+                <h3 style="font-weight:800; margin-bottom:15px;">Lifecycle Automation</h3>
+                <p>Engineering automated lead routing and handoff workflows to eliminate sales friction.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <span style="font-size:2.5rem; margin-bottom:25px; display:block;">📈</span>
+                <h3 style="font-weight:800; margin-bottom:15px;">ROI Attribution</h3>
+                <p>Building high-integrity dashboards that prove technical channel revenue and impact.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <span style="font-size:2.5rem; margin-bottom:25px; display:block;">🧬</span>
+                <h3 style="font-weight:800; margin-bottom:15px;">System Sync Logic</h3>
+                <p>Establishing standardized naming and real-time syncing across complex software ecosystems.</p>
+            </div>
+        </div>
+
+        <section class="contact" id="contact">
+            <div class="contact-content" data-aos="fade-right">
+                <h2>Authorized <br><span class="gradient-text">Handshake.</span></h2>
+                <p style="color: var(--dim); margin-top: 30px; font-size: 1.25rem; max-width: 480px; line-height: 1.6;">
+                    <strong style="color: var(--text);">Secure. Verified. Encrypted.</strong> <br>
+                    Connecting with high-tier corporate entities to architect the future of CRM integrity.
+                </p>
+            </div>
+
+            <div id="formContainer" data-aos="fade-left">
+                <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="contact">
+                    <p style="display:none;"><label>Bot Field: <input name="bot-field"></label></p>
+
+                    <input type="text" name="name" id="agencyName" placeholder="Agency Entity Name" required>
+
+                    <div style="position: relative;">
+                        <input type="email" name="email" id="emailInput" placeholder="Professional Email" required>
+                        <div id="emailError" class="validation-msg">SYSTEM ERROR: BUSINESS DOMAIN REQUIRED</div>
+                    </div>
+
+                    <textarea name="message" placeholder="Briefly describe your current CRM bottlenecks..."
+                        rows="4" required></textarea>
+
+                    <button type="submit" id="submitBtn" class="btn btn-shimmer"
+                        style="width: 100%; border: none; margin-top: 10px;">
+                        EXECUTE HANDSHAKE
+                    </button>
+                </form>
+
+                <div id="successMessage"
+                    style="display: none; text-align: center; padding: 40px; background: rgba(0, 189, 165, 0.05); border: 1px dashed var(--accent); border-radius: 30px;">
+                    <h3 style="color: var(--accent); margin-bottom: 10px;">HANDSHAKE SUCCESSFUL</h3>
+                    <p style="color: var(--dim); line-height: 1.6;">Inquiry encrypted and transmitted. <br> Expect a
+                        technical briefing within 24 hours.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div>SHAHMEER AKBAR // HUBSPOT TECHNICAL ARCHITECT</div>
+            <div class="copy-trigger" onclick="copyEmail()">
+                <a href="mailto:eng@shahmeerakbar.tech"
+                    style="text-decoration:none; color:inherit;">ENG@SHAHMEERAKBAR.TECH</a>
+                <span
+                    style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #000; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 8px; opacity: 0; transition: 0.3s; pointer-events: none;"
+                    id="copyHint">CLICK TO COPY EMAIL</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true, offset: 100 });
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: 1.2,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                let dx = mouse.x - p.x;
+                let dy = mouse.y - p.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    ctx.strokeStyle = 'rgba(255, 122, 89, 0.4)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+                }
+
+                ctx.fillStyle = '#cbd5e1';
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dx2 = p.x - p2.x; let dy2 = p.y - p2.y;
+                    let dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+                    if (dist2 < 120) {
+                        ctx.strokeStyle = `rgba(203, 213, 225, ${1 - dist2 / 120})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init(); animate();
+
+        const emailInput = document.getElementById('emailInput');
+        const emailError = document.getElementById('emailError');
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const forbidden = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com', 'aol.com'];
+
+        function validate() {
+            const val = emailInput.value.trim().toLowerCase();
+            if (val === "") return true;
+            const isForbidden = forbidden.includes(val.split('@')[1]);
+            if (isForbidden) {
+                emailInput.style.borderColor = 'var(--error)';
+                emailError.classList.add('visible');
+                return false;
+            } else {
+                emailInput.style.borderColor = '#e2e8f0';
+                emailError.classList.remove('visible');
+                return true;
+            }
+        }
+
+        function copyEmail() {
+            navigator.clipboard.writeText("eng@shahmeerakbar.tech");
+            const hint = document.getElementById('copyHint');
+            hint.innerText = "COPIED!"; hint.style.opacity = "1";
+            setTimeout(() => { hint.style.opacity = "0"; hint.innerText = "CLICK TO COPY EMAIL"; }, 2000);
+        }
+
+        emailInput.addEventListener('input', validate);
+
+        // NATIVE VALIDATION WRAPPER
+        contactForm.addEventListener('submit', (e) => {
+            if (!validate()) {
+                e.preventDefault();
+                return;
+            }
+            
+            // Visual feedback only
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "TRANSMITTING...";
+        });
+    </script>
+</body>
+
+</html>
