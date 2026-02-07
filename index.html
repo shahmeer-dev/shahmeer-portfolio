@@ -724,19 +724,16 @@
             </div>
 
             <div id="formContainer" data-aos="fade-left">
-                <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                    <input type="hidden" name="form-name" value="contact">
-                    <p style="display:none;"><label>Bot Field: <input name="bot-field"></label></p>
-
-                    <input type="text" name="name" id="agencyName" placeholder="Agency Entity Name" required>
+                <form id="contactForm" action="https://formspree.io/f/mqebvdkp" method="POST">
+                    <input type="text" name="agency" id="agencyName" placeholder="Agency Entity Name" required>
 
                     <div style="position: relative;">
                         <input type="email" name="email" id="emailInput" placeholder="Professional Email" required>
                         <div id="emailError" class="validation-msg">SYSTEM ERROR: BUSINESS DOMAIN REQUIRED</div>
                     </div>
 
-                    <textarea name="message" placeholder="Briefly describe your current CRM bottlenecks..."
-                        rows="4" required></textarea>
+                    <textarea name="message" placeholder="Briefly describe your current CRM bottlenecks..." rows="4"
+                        required></textarea>
 
                     <button type="submit" id="submitBtn" class="btn btn-shimmer"
                         style="width: 100%; border: none; margin-top: 10px;">
@@ -865,7 +862,7 @@
                 e.preventDefault();
                 return;
             }
-            
+
             // Visual feedback only
             submitBtn.disabled = true;
             submitBtn.innerHTML = "TRANSMITTING...";
