@@ -9,7 +9,7 @@
     <meta name="description"
         content="Technical HubSpot Specialist specializing in high-integrity system configuration, lead capture logic, and data hygiene for scaling agencies.">
     <meta name="keywords"
-        content="HubSpot Expert, CRM Technical Specialist, Data Integrity, HubSpot Automation, Technical HubSpot Consultant">
+        content="Hubspot Expert, CRM Technical Specialist, Data Integrity, HubSpot Automation, Technical HubSpot Consultant">
     <meta name="robots" content="index, follow">
 
     <meta property="og:type" content="website">
@@ -23,7 +23,6 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* [STYLES REMAIN COMPLETELY UNCHANGED AS REQUESTED] */
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@500&display=swap');
 
         :root {
@@ -387,6 +386,28 @@
             animation-play-state: paused;
         }
 
+        /* NEW TECHNICAL STANDARDS CSS */
+        .standard-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .standard-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--dim);
+        }
+
+        .standard-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 800;
+        }
+
         .portfolio-cta {
             grid-column: span 3;
             background: var(--text);
@@ -522,7 +543,7 @@
             background: #f8fafc;
         }
 
-        /* MOBILE OPTIMIZATION - ABSOLUTELY NO DESKTOP CHANGES */
+        /* MOBILE OPTIMIZATION */
         @media (max-width: 1000px) {
 
             html,
@@ -538,7 +559,6 @@
                 overflow: hidden;
             }
 
-            /* Reset AOS horizontal movements that cause overflow */
             [data-aos="fade-right"],
             [data-aos="fade-left"] {
                 transform: none !important;
@@ -604,7 +624,6 @@
             .card {
                 padding: 35px 25px;
                 animation: none;
-                /* Stabilize on mobile */
             }
 
             .portfolio-cta {
@@ -710,13 +729,13 @@
                 <p>Designing smart workflow architectures and system checks to ensure your HubSpot portal runs with zero
                     logic errors.</p>
             </div>
+
             <div class="portfolio-cta" data-aos="zoom-in">
                 <h2 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -2px;">Technical
                     Repository</h2>
                 <p style="color: #94a3b8; margin-bottom: 40px; font-size: 1.2rem;">See the technical build logic behind
                     my high-integrity HubSpot implementations.</p>
-                <a href="documentation.pdf" target="_blank"
-                    class="btn btn-shimmer">
+                <a href="documentation.pdf" target="_blank" class="btn btn-shimmer">
                     View Documentation
                 </a>
             </div>
@@ -739,6 +758,27 @@
                 <p>Building high-integrity dashboards that visualize technical channel performance and database health.
                 </p>
             </div>
+        </div>
+
+        <div class="card" style="grid-column: span 3; text-align: left; padding: 60px;" data-aos="fade-up">
+            <span
+                style="font-family: 'JetBrains Mono'; color: var(--royal); font-weight: 700; font-size: 10px; letter-spacing: 2px; display: block; margin-bottom: 15px;">
+                [ DELIVERY_STANDARD ]
+            </span>
+            <h2 style="font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 20px;">
+                I don't just build; <span class="gradient-text">I document.</span>
+            </h2>
+            <p style="color: var(--dim); font-size: 1.1rem; max-width: 800px;">
+                Every technical implementation I handle comes with a full documentation package to ensure your internal
+                team can maintain the system long-term.
+            </p>
+
+            <ul class="standard-list"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+                <li><strong>Logic Flowcharts:</strong> Visualizing complex automation and workflow branches.</li>
+                <li><strong>Property Mapping:</strong> Detailed records of all data architecture changes.</li>
+                <li><strong>User Handover Guides:</strong> Clear protocols for system management and stability.</li>
+            </ul>
         </div>
 
         <section class="contact" id="contact">
